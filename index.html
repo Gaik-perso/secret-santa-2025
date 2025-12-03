@@ -270,13 +270,13 @@
             <select id="participant">
                 <option value="" data-fr="-- Sélectionnez votre nom --" data-pl="-- Wybierz swoje imię --">-- Sélectionnez votre nom --</option>
                 <option value="Vincent">Vincent</option>
-                <option value="Sylwia_femme" data-fr="Sylwia (ma femme)" data-pl="Sylwia (żona)">Sylwia (ma femme)</option>
-                <option value="Bernadette" data-fr="Bernadette (Maman)" data-pl="Bernadette (Mama)">Bernadette (Maman)</option>
-                <option value="Jean_Michel" data-fr="Jean Michel (Papa)" data-pl="Jean Michel (Tata)">Jean Michel (Papa)</option>
-                <option value="Stephan" data-fr="Stephan (frère)" data-pl="Stephan (brat)">Stephan (frère)</option>
-                <option value="Marie_Julie" data-fr="Marie Julie (belle-sœur)" data-pl="Marie Julie (szwagierka)">Marie Julie (belle-sœur)</option>
-                <option value="Janusz" data-fr="Janusz (beau-père)" data-pl="Janusz (teść)">Janusz (beau-père)</option>
-                <option value="Sylwia_belle_mere" data-fr="Sylwia (belle-mère)" data-pl="Sylwia (teściowa)">Sylwia (belle-mère)</option>
+                <option value="Sylwia_Verdebout" data-fr="Sylwia Verdebout" data-pl="Sylwia Verdebout">Sylwia Verdebout</option>
+                <option value="Bernadette" data-fr="Bernadette" data-pl="Bernadette">Bernadette</option>
+                <option value="Jean_Michel" data-fr="Jean Michel" data-pl="Jean Michel">Jean Michel</option>
+                <option value="Stephan" data-fr="Stephan" data-pl="Stephan">Stephan</option>
+                <option value="Marie_Julie" data-fr="Marie Julie" data-pl="Marie Julie">Marie Julie</option>
+                <option value="Janusz" data-fr="Janusz" data-pl="Janusz">Janusz</option>
+                <option value="Sylwia_Fik" data-fr="Sylwia Fik" data-pl="Sylwia Fik">Sylwia Fik</option>
             </select>
 
             <button id="draw-btn" onclick="revealGift()" disabled>
@@ -319,36 +319,36 @@
         // Ce tirage a été généré en respectant toutes les contraintes
         const FINAL_DRAW = {
             'Vincent': 'Janusz',
-            'Sylwia_femme': 'Jean Michel',
+            'Sylwia_Verdebout': 'Jean Michel',
             'Bernadette': 'Stephan',
             'Jean_Michel': 'Marie Julie',
-            'Stephan': 'Sylwia (belle-mère)',
+            'Stephan': 'Sylwia Fik',
             'Marie_Julie': 'Vincent',
             'Janusz': 'Bernadette',
-            'Sylwia_belle_mere': 'Sylwia (ma femme)'
+            'Sylwia_Fik': 'Sylwia Verdebout'
         };
 
         // Traductions
         const translations = {
             fr: {
-                'Janusz': 'Janusz (beau-père)',
-                'Jean Michel': 'Jean Michel (Papa)',
-                'Stephan': 'Stephan (frère)',
-                'Marie Julie': 'Marie Julie (belle-sœur)',
-                'Sylwia (belle-mère)': 'Sylwia (belle-mère)',
+                'Janusz': 'Janusz',
+                'Jean Michel': 'Jean Michel',
+                'Stephan': 'Stephan',
+                'Marie Julie': 'Marie Julie',
+                'Sylwia Fik': 'Sylwia Fik',
                 'Vincent': 'Vincent',
-                'Bernadette': 'Bernadette (Maman)',
-                'Sylwia (ma femme)': 'Sylwia (ma femme)'
+                'Bernadette': 'Bernadette',
+                'Sylwia Verdebout': 'Sylwia Verdebout'
             },
             pl: {
-                'Janusz': 'Janusz (teść)',
-                'Jean Michel': 'Jean Michel (Tata)',
-                'Stephan': 'Stephan (brat)',
-                'Marie Julie': 'Marie Julie (szwagierka)',
-                'Sylwia (belle-mère)': 'Sylwia (teściowa)',
+                'Janusz': 'Janusz',
+                'Jean Michel': 'Jean Michel',
+                'Stephan': 'Stephan',
+                'Marie Julie': 'Marie Julie',
+                'Sylwia Fik': 'Sylwia Fik',
                 'Vincent': 'Vincent',
-                'Bernadette': 'Bernadette (Mama)',
-                'Sylwia (ma femme)': 'Sylwia (żona)'
+                'Bernadette': 'Bernadette',
+                'Sylwia Verdebout': 'Sylwia Verdebout'
             }
         };
 

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎅 Secret Santa 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: #f0f0f0;
+        }
+
+        h1 {
+            color: #c41e3a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            color: #165b33;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .snow {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        select:hover:not(:disabled) {
+            border-color: #c41e3a;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #165b33;
+            box-shadow: 0 0 0 3px rgba(22, 91, 51, 0.1);
+        }
+
+        select:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        button {
+            background: linear-gradient(135deg, #c41e3a 0%, #165b33 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.4);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 30, 58, 0.6);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .result {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border-radius: 15px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result h2 {
+            color: #c41e3a;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .result-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #165b33;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .gift-icon {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .security-notice {
+            background: #d1ecf1;
+            border: 2px solid #0c5460;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #0c5460;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .locked-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-top: 40px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .lang-switch {
+                top: 10px;
+                right: 10px;
+            }
+
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('fr')" id="btn-fr">🇫🇷 FR</button>
+            <button class="lang-btn" onclick="setLanguage('pl')" id="btn-pl">🇵🇱 PL</button>
+        </div>
+
+        <div class="snow">❄️ 🎄 ❄️</div>
+        <h1>🎅 Secret Santa 2025</h1>
+        <p class="subtitle" data-fr="Tirage au Sort Familial" data-pl="Rodzinne Losowanie">Tirage au Sort Familial</p>
+
+        <div id="selection-form">
+            <label for="participant" data-fr="Qui êtes-vous ?" data-pl="Kim jesteś?">Qui êtes-vous ?</label>
+            <select id="participant">
+                <option value="" data-fr="-- Sélectionnez votre nom --" data-pl="-- Wybierz swoje imię --">-- Sélectionnez votre nom --</option>
+                <option value="Vincent">Vincent</option>
+                <option value="Sylwia_femme" data-fr="Sylwia (ma femme)" data-pl="Sylwia (żona)">Sylwia (ma femme)</option>
+                <option value="Bernadette" data-fr="Bernadette (Maman)" data-pl="Bernadette (Mama)">Bernadette (Maman)</option>
+                <option value="Jean_Michel" data-fr="Jean Michel (Papa)" data-pl="Jean Michel (Tata)">Jean Michel (Papa)</option>
+                <option value="Stephan" data-fr="Stephan (frère)" data-pl="Stephan (brat)">Stephan (frère)</option>
+                <option value="Marie_Julie" data-fr="Marie Julie (belle-sœur)" data-pl="Marie Julie (szwagierka)">Marie Julie (belle-sœur)</option>
+                <option value="Janusz" data-fr="Janusz (beau-père)" data-pl="Janusz (teść)">Janusz (beau-père)</option>
+                <option value="Sylwia_belle_mere" data-fr="Sylwia (belle-mère)" data-pl="Sylwia (teściowa)">Sylwia (belle-mère)</option>
+            </select>
+
+            <button id="draw-btn" onclick="revealGift()" disabled>
+                <span data-fr="🎁 Découvrir mon Secret Santa" data-pl="🎁 Odkryj mojego Secret Santa">🎁 Découvrir mon Secret Santa</span>
+            </button>
+
+            <div class="warning">
+                <strong data-fr="⚠️ Attention :" data-pl="⚠️ Uwaga:">⚠️ Attention :</strong>
+                <span data-fr="Une fois révélé, vous ne pourrez plus changer de sélection. Ne regardez pas l'écran des autres !" 
+                      data-pl="Po odkryciu nie będziesz mógł zmienić wyboru. Nie podglądaj ekranów innych!">
+                    Une fois révélé, vous ne pourrez plus changer de sélection. Ne regardez pas l'écran des autres !
+                </span>
+            </div>
+        </div>
+
+        <div id="result" class="result">
+            <h2 data-fr="🎉 Votre mission :" data-pl="🎉 Twoja misja:">🎉 Votre mission :</h2>
+            <div class="gift-icon">🎁</div>
+            <p style="font-size: 1.3em; color: #333;" data-fr="Vous devez offrir un cadeau à :" data-pl="Musisz podarować prezent dla:">
+                Vous devez offrir un cadeau à :
+            </p>
+            <div class="result-name" id="result-name"></div>
+            <p style="color: #666; margin-top: 15px;" data-fr="Ho ho ho ! Gardez le secret ! 🤫" data-pl="Ho ho ho! Zachowaj to w tajemnicy! 🤫">
+                Ho ho ho ! Gardez le secret ! 🤫
+            </p>
+            
+            <div class="security-notice">
+                <div class="locked-icon">🔒</div>
+                <strong data-fr="Sélection verrouillée" data-pl="Wybór zablokowany">Sélection verrouillée</strong><br>
+                <span data-fr="Vous ne pouvez plus changer de nom pour préserver la confidentialité du tirage." 
+                      data-pl="Nie możesz już zmienić imienia, aby zachować poufność losowania.">
+                    Vous ne pouvez plus changer de nom pour préserver la confidentialité du tirage.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🎯 TIRAGE UNIQUE ET DÉFINITIF - Ne pas modifier !
+        // Ce tirage a été généré en respectant toutes les contraintes
+        const FINAL_DRAW = {
+            'Vincent': 'Janusz',
+            'Sylwia_femme': 'Jean Michel',
+            'Bernadette': 'Stephan',
+            'Jean_Michel': 'Marie Julie',
+            'Stephan': 'Sylwia (belle-mère)',
+            'Marie_Julie': 'Vincent',
+            'Janusz': 'Bernadette',
+            'Sylwia_belle_mere': 'Sylwia (ma femme)'
+        };
+
+        // Traductions
+        const translations = {
+            fr: {
+                'Janusz': 'Janusz (beau-père)',
+                'Jean Michel': 'Jean Michel (Papa)',
+                'Stephan': 'Stephan (frère)',
+                'Marie Julie': 'Marie Julie (belle-sœur)',
+                'Sylwia (belle-mère)': 'Sylwia (belle-mère)',
+                'Vincent': 'Vincent',
+                'Bernadette': 'Bernadette (Maman)',
+                'Sylwia (ma femme)': 'Sylwia (ma femme)'
+            },
+            pl: {
+                'Janusz': 'Janusz (teść)',
+                'Jean Michel': 'Jean Michel (Tata)',
+                'Stephan': 'Stephan (brat)',
+                'Marie Julie': 'Marie Julie (szwagierka)',
+                'Sylwia (belle-mère)': 'Sylwia (teściowa)',
+                'Vincent': 'Vincent',
+                'Bernadette': 'Bernadette (Mama)',
+                'Sylwia (ma femme)': 'Sylwia (żona)'
+            }
+        };
+
+        let currentLang = 'fr';
+        let hasRevealed = false;
+
+        // Fonction de changement de langue
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Mise à jour des boutons de langue
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+            document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
+            
+            // Mise à jour de tous les textes traduits
+            document.querySelectorAll('[data-fr][data-pl]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'OPTION' || el.tagName === 'SPAN') {
+                    el.textContent = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+
+            // Mise à jour du nom révélé si déjà affiché
+            if (hasRevealed) {
+                const select = document.getElementById('participant');
+                const selectedPerson = select.value;
+                const recipient = FINAL_DRAW[selectedPerson];
+                document.getElementById('result-name').textContent = translations[lang][recipient];
+            }
+        }
+
+        // Fonction pour révéler le cadeau
+        function revealGift() {
+            const select = document.getElementById('participant');
+            const selectedPerson = select.value;
+            
+            if (!selectedPerson) {
+                const msg = currentLang === 'fr' 
+                    ? 'Veuillez sélectionner votre nom !' 
+                    : 'Proszę wybrać swoje imię!';
+                alert(msg);
+                return;
+            }
+
+            const recipient = FINAL_DRAW[selectedPerson];
+            const translatedRecipient = translations[currentLang][recipient];
+            
+            // Afficher le résultat
+            document.getElementById('result-name').textContent = translatedRecipient;
+            document.getElementById('selection-form').style.display = 'none';
+            document.getElementById('result').classList.add('show');
+            
+            // VERROUILLAGE : empêcher tout changement
+            hasRevealed = true;
+            select.disabled = true;
+            document.getElementById('draw-btn').disabled = true;
+        }
+
+        // Activer/désactiver le bouton selon la sélection
+        document.getElementById('participant').addEventListener('change', function() {
+            if (!hasRevealed) {
+                document.getElementById('draw-btn').disabled = !this.value;
+            }
+        });
+
+        // Désactiver le bouton au départ
+        document.getElementById('draw-btn').disabled = true;
+
+        // Empêcher le retour arrière après révélation
+        window.addEventListener('beforeunload', function(e) {
+            if (hasRevealed) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>
